@@ -3,7 +3,6 @@ package com.arch.infra.adapter.input.web
 import com.arch.application.port.input.LoadUsersUseCase
 import com.arch.application.port.input.UserRegisterCommand
 import com.arch.application.port.input.UserRegisterUseCase
-import com.arch.application.domain.User
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -22,7 +21,7 @@ class UserResource(
     }
 
     @GetMapping
-    fun findAllUsers(): List<User> {
-        return loadUsersUseCase.loadUsers()
+    fun findAllUsers(): List<UserLoadedResponse> {
+        return loadUsersUseCase.loadUsers().map { UserLoadedResponse(it.id, it.name) }
     }
 }
