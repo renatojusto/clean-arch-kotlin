@@ -32,3 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 /Estudos.md
+.flattened-pom.xml
