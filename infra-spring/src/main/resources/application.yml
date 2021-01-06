@@ -5,10 +5,12 @@ spring:
         inputChannel:
           destination: emailSenderRegistration
           binder: local_rabbit
+          consumer:
+            concurrency: 10
+          group: emailRegistrationConsumers
         outputChannel:
           destination: emailSenderRegistration
           binder: local_rabbit
-          group: emailRegistrationConsumers
       binders:
         local_rabbit:
           type: rabbit
