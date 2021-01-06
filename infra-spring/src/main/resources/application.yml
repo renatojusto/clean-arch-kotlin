@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        inputChannel:
+          destination: emailSenderRegistration
+          binder: local_rabbit
+        outputChannel:
+          destination: emailSenderRegistration
+          binder: local_rabbit
+          group: emailRegistrationConsumers
+      binders:
+        local_rabbit:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+                virtual-host: /

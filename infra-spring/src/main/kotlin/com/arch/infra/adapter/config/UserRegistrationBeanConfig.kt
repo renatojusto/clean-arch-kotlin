@@ -2,6 +2,7 @@ package com.arch.infra.adapter.config
 
 import com.arch.application.UserRegisterService
 import com.arch.application.port.input.UserRegisterUseCase
+import com.arch.application.port.output.EmailNotificationRegisterPort
 import com.arch.application.port.output.SaveUserPort
 import com.arch.infra.adapter.output.persistence.UserPersistenceAdapter
 import com.arch.infra.adapter.output.persistence.UserRepository
@@ -17,8 +18,11 @@ class UserRegistrationBeanConfig {
     }
 
     @Bean
-    fun newUserRegistrationUseCase(saveUserPort: SaveUserPort): UserRegisterUseCase {
-        return UserRegisterService(saveUserPort)
+    fun newUserRegistrationUseCase(
+        saveUserPort: SaveUserPort,
+        emailNotificationRegisterPort: EmailNotificationRegisterPort
+    ): UserRegisterUseCase {
+        return UserRegisterService(saveUserPort, emailNotificationRegisterPort)
     }
 
 }

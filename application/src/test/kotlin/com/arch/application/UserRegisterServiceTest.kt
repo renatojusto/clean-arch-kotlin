@@ -2,8 +2,9 @@ package com.arch.application
 
 import com.arch.application.domain.User
 import com.arch.application.port.input.UserRegisterCommand
-import com.arch.application.port.output.EmailNotificationPort
+import com.arch.application.port.output.EmailNotificationRegisterPort
 import com.arch.application.port.output.SaveUserPort
+import com.arch.application.port.output.SendConfirmationMailCommand
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.BDDMockito.then
@@ -21,17 +22,18 @@ class UserRegisterServiceTest {
     lateinit var saveUserPort: SaveUserPort
 
     @Mock
-    lateinit var emailNotificationPort: EmailNotificationPort
+    lateinit var emailNotificationRegisterPort: EmailNotificationRegisterPort
 
     @Test
     fun `registerUser should saved user in repository`() {
         val userRegisterCommand = UserRegisterCommand(name = "Renato")
         val user = User(name = "Renato")
+        val sendConfirmationMailCommand = SendConfirmationMailCommand.create(user)
 
         userRegisterService.registerUser(userRegisterCommand)
 
         then(saveUserPort).should().registerUser(user)
-        then(emailNotificationPort).should().send(user)
+        then(emailNotificationRegisterPort).should().notifyUserRegistred(sendConfirmationMailCommand)
     }
 
 }

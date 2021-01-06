@@ -22,6 +22,7 @@
         <flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
         <revision>0.0.1</revision>
         <mockito-core.version>3.6.28</mockito-core.version>
+        <kotlin-logging.version>1.12.0</kotlin-logging.version>
     </properties>
 
     <modules>
@@ -69,6 +70,12 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.microutils</groupId>
+            <artifactId>kotlin-logging</artifactId>
+            <version>${kotlin-logging.version}</version>
         </dependency>
     </dependencies>
 

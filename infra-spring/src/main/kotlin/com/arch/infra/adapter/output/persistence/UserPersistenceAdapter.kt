@@ -1,14 +1,15 @@
 package com.arch.infra.adapter.output.persistence
 
+import com.arch.application.domain.User
 import com.arch.application.port.output.LoadUserPort
 import com.arch.application.port.output.SaveUserPort
-import com.arch.application.domain.User
 
 class UserPersistenceAdapter(private val userRepository: UserRepository) : SaveUserPort, LoadUserPort {
 
-    override fun registerUser(user: User) {
+    override fun registerUser(user: User): User {
         val userEntity = UserEntity(name = user.name)
-        userRepository.save(userEntity)
+        val savedUser = userRepository.save(userEntity)
+        return User(savedUser.id, savedUser.name)
     }
 
     override fun loadUsers(): List<User> {

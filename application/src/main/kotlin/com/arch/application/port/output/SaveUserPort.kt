@@ -4,6 +4,6 @@ import com.arch.application.domain.User
 
 interface SaveUserPort {
 
-    fun registerUser(user: User)
+    fun registerUser(user: User): User
 
 }
