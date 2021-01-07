@@ -27,3 +27,5 @@ spring:
                 username: guest
                 password: guest
                 virtual-host: /
+  zipkin:
+    enabled: true

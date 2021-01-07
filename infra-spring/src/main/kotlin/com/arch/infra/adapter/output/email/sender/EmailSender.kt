@@ -18,7 +18,6 @@ class EmailSender {
         }
         logger.info { "Enviando email: [1]: $log" }
         Thread.sleep(5000)
-        throw RuntimeException("Erro de Rede")
         logger.info { "Email Enviado!" }
     }
 
