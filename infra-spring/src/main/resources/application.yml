@@ -2,7 +2,7 @@ spring:
   cloud:
     stream:
       bindings:
-        inputChannel:
+        emailNotificationInput:
           destination: emailSenderRegistration
           binder: local_rabbit
           consumer:
@@ -13,7 +13,7 @@ spring:
             #dlq-ttl: 5000
             #dlq-dead-letter-exchange:
           group: emailRegistrationConsumers
-        outputChannel:
+        emailNotificationOutput:
           destination: emailSenderRegistration
           binder: local_rabbit
       binders:

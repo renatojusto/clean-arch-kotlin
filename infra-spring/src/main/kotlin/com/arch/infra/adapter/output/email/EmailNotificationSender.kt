@@ -1,4 +1,4 @@
-package com.arch.infra.adapter.output.email.sender
+package com.arch.infra.adapter.output.email
 
 import mu.KotlinLogging
 import org.springframework.amqp.ImmediateAcknowledgeAmqpException
@@ -8,11 +8,11 @@ import org.springframework.messaging.handler.annotation.Header
 
 private val logger = KotlinLogging.logger {}
 
-@EnableBinding(EmailSink::class)
+@EnableBinding(EmailNotificationBinding::class)
 class EmailSender {
 
-    @StreamListener(EmailSink.INPUT)
-    fun send(log: String, @Header(name = "x-death", required = false) death: Map<String, Object>?) {
+    @StreamListener(EmailNotificationBinding.INPUT)
+    fun handle(log: String, @Header(name = "x-death", required = false) death: Map<String, Object>?) {
         if (RETRY_TIMES.equals(death?.get("count"))) {
             throw ImmediateAcknowledgeAmqpException("Desistindo da fila")
         }

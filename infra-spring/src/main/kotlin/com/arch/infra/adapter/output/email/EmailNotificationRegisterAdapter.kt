@@ -8,12 +8,12 @@ import org.springframework.messaging.support.MessageBuilder
 
 private val logger = KotlinLogging.logger {}
 
-@EnableBinding(EmailSource::class)
-class EmailNotificationRegisterAdapter (private val emailSource: EmailSource): EmailNotificationRegisterPort {
+@EnableBinding(EmailNotificationBinding::class)
+class EmailNotificationRegisterAdapter (private val emailNotificationBinding: EmailNotificationBinding): EmailNotificationRegisterPort {
 
     override fun notifyUserRegistred(sendConfirmationMailCommand: SendConfirmationMailCommand) {
         logger.info { "Enviando E-mail do usuário: ${sendConfirmationMailCommand.userId} para a fila" }
-        this.emailSource
+        this.emailNotificationBinding
             .output()
             .send(MessageBuilder.withPayload(sendConfirmationMailCommand.getMessage()).build())
     }
